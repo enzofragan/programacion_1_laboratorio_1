@@ -25,6 +25,13 @@ int main()
     printf("el resultado es %f",numero);
     return 0;
 }
+/** \brief
+ *
+ * \param numeroUno int
+ * \param numeroDos int
+ * \return float
+ *
+ */
 float dividirEnteros(int numeroUno,int numeroDos)
 {
     float resultado=0;
