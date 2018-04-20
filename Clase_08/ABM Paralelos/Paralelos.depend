@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1524235174 source:d:\fragan\abm paralelos\main.c
+	<stdio.h>
+	<stdlib.h>
+
