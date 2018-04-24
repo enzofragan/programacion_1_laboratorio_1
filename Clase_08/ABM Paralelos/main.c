@@ -7,14 +7,15 @@ int buscarLibre(int[], int);
 void mostrarAlumnos(int[], char[][20], int[], int[], float[], int);
 float calcularPromedio(int, int);
 int cargarAlumno(int[], char[][20], int[], int[], float[], int);
+void modificarAlumnos(int [], char [][20], int [], int[], float[], int);
 
 int main()
 {
     int legajo[TAM]={};
-    char nombre[TAM][20];
-    int nota1[TAM]={5,4};
-    int nota2[TAM]={3,2};
-    float promedio[TAM];
+    char nombre[TAM][20]={};
+    int nota1[TAM]={};
+    int nota2[TAM]={};
+    float promedio[TAM]={};
     int opcion;
     int index;
     int i;
@@ -38,12 +39,11 @@ int main()
             }
             break;
         case 2:
-
         mostrarAlumnos(legajo,nombre,nota1,nota2,promedio,TAM);
+        break;
+        case 3:
 
-
-
-
+        modificarAlumnos(legajo,nombre,nota1,nota2,promedio,TAM);
         break;
         }
 
@@ -79,9 +79,19 @@ int cargarAlumno(int legajos[], char nombres[][20], int nota1[], int nota2[], fl
     index = buscarLibre(legajos, tam);
             if(index!=-1)
             {
-                printf("ingrese el nombre: \n");
-                gets(nombres[index]);
+                printf("ingrese el legajo: \n");
                 fflush(stdin);
+                scanf("%d",&legajos[index]);///pedir numeros
+                printf("ingrese el nombre: \n");
+                fflush(stdin);
+                gets(nombres[index]);///pedir nombres
+                printf("ingrese la primera nota: \n");
+                fflush(stdin);
+                scanf("%d",&nota1[index]);
+                printf("ingrese la segunda nota: \n");
+                fflush(stdin);
+                scanf("%d",&nota2[index]);
+                promedio[index]=calcularPromedio(nota1[index],nota2[index]);
                 //Pedir datos
             }
             return index;
@@ -102,9 +112,14 @@ void mostrarAlumnos(int legajos[], char nombres[][20], int nota1[], int nota2[],
             {
                 if(legajos[i]!=0)
                 {
-                    printf("%d %s %d %d %f\n", legajos[i], nombres[i], nota1[i], nota2[i], promedio[i] );
+                    printf("%d %s %d %d %.2f\n", legajos[i], nombres[i], nota1[i], nota2[i], promedio[i] );
                 }
 
             }
+
+}
+
+void modificarAlumnos(int legajos[], char nombres[][20], int nota1[], int nota2[], float promedio[], int tam)
+{
 
 }
