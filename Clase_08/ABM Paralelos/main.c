@@ -7,7 +7,9 @@ int buscarLibre(int[], int);
 void mostrarAlumnos(int[], char[][20], int[], int[], float[], int);
 float calcularPromedio(int, int);
 int cargarAlumno(int[], char[][20], int[], int[], float[], int);
-void modificarAlumnos(int [], char [][20], int [], int [],float [], int);
+int modificarAlumnos(int [], char [][20], int [], int [],int , int);
+int buscarLegajo(int [],int ,int );
+int borrarAlumnos(int [], char [][20], int [], int [],float [],int , int);
 
 int main()
 {
@@ -20,10 +22,13 @@ int main()
     int index;
     int i;
     int j;
-    int aux;
-    int auxNotas;
+    int auxNombre[20];
+    int auxNotas1;
     int auxNotas2;
     int flag;
+    int libre;
+    int reIngre;
+    int eliminar;
     do
     {
         printf("1. ALTAS\n2. MOSTRAR\n3. MODIFICAR\n4.BAJA\n5.ORDENAR (por nombre)\n9. SALIR\nElija una opcion: ");
@@ -43,46 +48,61 @@ int main()
                 printf("Alumno ingresado\n");
             }
             break;
+
         case 2:
         mostrarAlumnos(legajo,nombre,nota1,nota2,promedio,TAM);
         break;
+
         case 3:
-            printf("Modificar\n");
-                int i;
-                for(i=0;i<TAM;i++)
-                {
-                    modificarAlumnos(legajo,nombre,nota1,nota2,promedio,TAM);
-                }
-                if(flag==0)
-                {
-                    printf("\nNo se encontro el id");
-                }
+        printf("ingrese el legajo: ");
+        scanf("%d",&flag);
+        libre=buscarLegajo(legajo,flag,TAM);
+        for(int i=0;i<TAM;i++)
+        {
+            if(libre != -1)
+            {
+                reIngre=modificarAlumnos(legajo,nombre,nota1,nota2,flag,TAM);
+            }
+        }
+
         break;
 
         case 4:
+            printf("ingrese el legajo: ");
+            scanf("%d",&flag);
+            libre=buscarLegajo(legajo,flag,TAM);
+            for(int i=0;i<TAM;i++)
+            {
+                if(libre != -1)
+                {
+                    eliminar=borrarAlumnos(legajo,nombre,nota1,nota2,promedio,flag,TAM);
+                }
+            }
             break;
 
         case 5:
-            for(i=0;i<TAM-1;i++)
-            {
-                for(j=i+1;j<TAM;j++)
-                {
-                    if(strcmp(nombre[i],nombre[j])>0)
-                    {
-                        strcpy(aux,nombre[i]);
-                        strcpy(nombre[i],nombre[j]);
-                        strcpy(nombre[j],aux);
 
-                        auxNotas= nota1[i];
-                        nota1[i]=nota1[j];
-                        nota1[j]=auxNotas;
+           for(i=0;i<TAM-1;i++)
+           {
+               for(j=i+1;j<TAM;j++)
+               {
+                   if(strcmp(nombre[i],nombre[j])>0)
+                   {
+                       strcpy(auxNombre,nombre[i]);
+                       strcpy(nombre[i],nombre[j]);
+                       strcpy(nombre[j],auxNombre);
 
-                        auxNotas2=nota2[i];
-                        nota2[i]=nota2[j];
-                        nota2[j]=auxNotas2;
-                    }
-                }
-            }
+                       auxNotas1=nota1[i];
+                       nota1[i]=nota1[j];
+                       nota1[j]=auxNotas1;
+
+                       auxNotas2=nota2[i];
+                       nota2[i]=nota2[j];
+                       nota2[j]=auxNotas2;
+                   }
+               }
+           }
+            mostrarAlumnos(legajo,nombre,nota1,nota2,promedio,TAM);
             break;
         }
 
@@ -157,36 +177,71 @@ void mostrarAlumnos(int legajos[], char nombres[][20], int nota1[], int nota2[],
             }
 
 }
-
-void modificarAlumnos(int legajos[], char nombres[][20], int nota1[], int nota2[],float promedio[], int tam)
+int buscarLegajo(int legajos[],int buscardo,int tam)
 {
-    int flag=0;
-    char auxInt;
+    int indice = -1;
+    int i;
+    for(i=0;i<tam;i++)
+    {
+        if(legajos[i]==buscardo)
+        {
+            indice=i;
+            break;
+        }
+    }
+    return indice;
+}
+
+int modificarAlumnos(int legajos[], char nombres[][20], int nota1[], int nota2[],int buscado, int tam)
+{
+    int libres;
     char rta;
 
-        mostrarAlumnos(legajos,nombres,nota1,nota2,promedio,tam);
-        printf("Ingresar el legajo: ");
-        scanf("%d", legajos);
+    libres=buscarLegajo(legajos,buscado,tam);
 
-        if(legajos[i]==legajos)
-        {
+    while(rta!='n')
+    {
 
-            printf("\nIngresar nombre: ");
-            fflush(stdin);
-            gets(auxInt)
 
-            printf("\n¿Desea realizar la modificacion?");
-            scanf("%c",rta);
+    if(libres!=-1)
+    {
+        printf("ingrese el nombre: \n");
+        fflush(stdin);
+        gets(nombres[libres]);
+        printf("ingrese la primera nota: \n");
+        fflush(stdin);
+        scanf("%d",&nota1[libres]);
+        printf("ingrese la segunda nota: \n");
+        fflush(stdin);
+        scanf("%d",&nota2[libres]);
+    }
 
-            if(rta=='s')
+
+    printf("desea continuar? s/n: ");
+    fflush(stdin);
+    scanf("%c",&rta);
+
+    }
+
+    return libres;
+}
+
+int borrarAlumnos(int legajos[], char nombres[][20], int nota1[], int nota2[],float promedios[],int buscado, int tam)
+{
+    int libres;
+    char rta;
+
+    libres=buscarLegajo(legajos,buscado,tam);
+
+    while(rta!='n')
+    {
+            if(libres!=-1)
             {
-                nombres=auxInt;
+              mostrarAlumnos(legajos,nombres,nota1,nota2,promedios,tam);
+            }
 
-            }
-            else
-            {
-                printf("\nAccion cancelada");
-            }
-            flag=1;
-        }
+        printf("desea continuar? s/n: ");
+        fflush(stdin);
+        scanf("%c",&rta);
+    }
 }
