@@ -1,0 +1,14 @@
+# depslib dependency file v1.0
+1524755157 source:d:\fragan\workspace_clase9\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"localidad.h"
+
+1524752912 d:\fragan\workspace_clase9\estructuras.h
+
+1524754316 d:\fragan\workspace_clase9\localidad.h
+
+1524755123 source:d:\fragan\workspace_clase9\localidad.c
+	"localidad.h"
+
