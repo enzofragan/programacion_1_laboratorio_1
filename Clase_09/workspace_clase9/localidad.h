@@ -5,11 +5,17 @@ typedef struct
 {
     int id;
     int estado;
-    char nombreLocalidad[50];
+    char nombreEmpleado[50];
 
-}eLocalidad;
+}eEmpleado;
 
-void loc_mostrarUno(eLocalidad);
-void loc_mostrarListado(eLocalidad [],int);
 
 #endif // LOCALIDAD_H_INCLUDED
+void emp_mostrarUno(eEmpleado aux);
+void emp_mostrarListado(eEmpleado listado[],int largo);
+int emp_Alta(eEmpleado listado[],int largo);
+void emp_Baja(eEmpleado listado[],int largo,int idParaBorrar);
+void emp_Modificacion(eEmpleado listado[],int largo,int idParaModificar);
+void emp_OrdenarDescPorNombre(eEmpleado listado[],int largo);
+void emp_OrdenarDescPorEnteros(eEmpleado listado[],int largo);
+int buscar(eEmpleado listado[], int largo);
