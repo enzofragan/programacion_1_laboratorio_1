@@ -42,9 +42,26 @@ int eUso_libreUso(eUsuario listaUso[], int limiteUso)
     return retornar;
 }
 
-int eUso_sigId(eUsuario [],int limite)
+int eUso_sigId(eUsuario lista[],int limite)
 {
+    int retorno = 0;
+    int i;
+    if(limite > 0 && lista != NULL)
+    {
+        for(i=0; i<limite; i++)
+        {
+            if(lista[i].estado == 0)
+            {
+                    if(lista[i].idUsuario>retorno)
+                    {
+                         retorno=lista[i].idUsuario;
+                    }
 
+            }
+        }
+    }
+
+    return retorno+1;
 }
 
 int eUSo_mostrarSolo(eUsuario parametro)
@@ -82,12 +99,11 @@ int eUso_alta(eUsuario listaUso[],int limite)
         i=eUso_libreUso(listaUso,limite);
         if(i>=0)
         {
-            printf("ingrese el id del usuario: ");
-            fflush(stdin);
-            scanf("%d",&listaUso[i].idUsuario);
+            id=eUso_sigId(listaUso,limite);
             printf("ingrese el nombre del usuario: ");
             fflush(stdin);
             gets(listaUso[i].nombre);
+            listaUso[i].idUsuario=id;
             listaUso[i].estado=0;
             retornar=0;
         }
