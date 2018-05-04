@@ -8,6 +8,7 @@
 int main()
 {
     int opcion;
+    int valor;
     eUsuario listadoDeUsuario[CantUsuarios];
     eUso_inicio(listadoDeUsuario,CantUsuarios);
 
@@ -20,7 +21,15 @@ int main()
      switch(opcion)
         {
         case 1:
-        eUso_alta(listadoDeUsuario,CantUsuarios);
+        valor=eUso_alta(listadoDeUsuario,CantUsuarios);
+        if(valor>=0)
+        {
+            printf("ingreso completado");
+        }
+        else
+        {
+            printf("contraseña incorrecta");
+        }
         break;
 
         case 2:

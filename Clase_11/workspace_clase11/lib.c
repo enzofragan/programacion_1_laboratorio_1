@@ -16,6 +16,7 @@ int eUso_inicio(eUsuario listado[],int limite)
         {
             listado[i].estado= 1;
             listado[i].idUsuario=0;
+            listado[i].contrase=1234;
             strcpy(listado[i].nombre,"");
         }
     }
@@ -103,6 +104,9 @@ int eUso_alta(eUsuario listaUso[],int limite)
             printf("ingrese el nombre del usuario: ");
             fflush(stdin);
             gets(listaUso[i].nombre);
+            printf("ingrese contraseña: ");
+            fflush(stdin);
+            scanf("%d",&listaUso[i].contrase);
             listaUso[i].idUsuario=id;
             listaUso[i].estado=0;
             retornar=0;

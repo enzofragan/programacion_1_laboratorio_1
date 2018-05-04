@@ -15,6 +15,7 @@ typedef struct
 typedef struct
 {
     int idUsuario;
+    int contrase;
     char nombre[50];
     int estado;
 
