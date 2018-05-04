@@ -1,13 +1,13 @@
 # depslib dependency file v1.0
-1525436181 source:d:\fragan\programacion_1_laboratorio_1\clase_11\workspace_clase11\lib.c
+1525446654 source:d:\fragan\programacion_1_laboratorio_1\clase_11\workspace_clase11\lib.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"lib.h"
 
-1525440270 d:\fragan\programacion_1_laboratorio_1\clase_11\workspace_clase11\lib.h
+1525447371 d:\fragan\programacion_1_laboratorio_1\clase_11\workspace_clase11\lib.h
 
-1525438909 source:d:\fragan\programacion_1_laboratorio_1\clase_11\workspace_clase11\main.c
+1525447371 source:d:\fragan\programacion_1_laboratorio_1\clase_11\workspace_clase11\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>

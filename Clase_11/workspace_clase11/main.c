@@ -8,7 +8,9 @@
 int main()
 {
     int opcion;
-    int valor;
+    int valorUno;
+    int valorB;
+    int string;
     eUsuario listadoDeUsuario[CantUsuarios];
     eUso_inicio(listadoDeUsuario,CantUsuarios);
 
@@ -21,18 +23,27 @@ int main()
      switch(opcion)
         {
         case 1:
-        valor=eUso_alta(listadoDeUsuario,CantUsuarios);
-        if(valor>=0)
+        valorUno=eUso_alta(listadoDeUsuario,CantUsuarios);
+        if(valorUno>=0)
         {
-            printf("ingreso completado");
+            printf("\ningreso completado");
         }
         else
         {
-            printf("contraseña incorrecta");
+            printf("\ncontraseña incorrecta");
         }
         break;
 
         case 2:
+            valorB=eUso_baja(listadoDeUsuario,CantUsuarios);
+            if(valorB>=0)
+            {
+                printf("\nbaja completada");
+            }
+            else
+            {
+                printf("\naccion cancelada");
+            }
             break;
 
         case 3:

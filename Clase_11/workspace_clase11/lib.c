@@ -73,21 +73,36 @@ int eUso_busqueda(eUsuario lista[],int limite)
     int indice=-1;
     int i;
 
-    for (i=0;i<limite;i++)
+    printf("ingrese el id del usuario: ");
+    fflush(stdin);
+    scanf("%d",&id);
+    while(esNumero(lista[i].contrase)==0)
     {
-        printf("ingrese el id del usuario: ");
-        fflush(stdin);
-        scanf("%d",&id);
-        printf("ingrese el nombre del usuario: ");
+        printf("hoal\n");
+    }
+    printf("ingrese el nombre del usuario: ");
+    fflush(stdin);
+    gets(nombre);
+    while(esLetra(nombre)==0)
+    {
+        printf("ingrese un nombre valido: ");
         fflush(stdin);
         gets(nombre);
-        printf("ingrese la contraseña del usuario: ");
-        fflush(stdin);
-        scanf("%d",&contra);
+    }
+    printf("ingrese la contraseña del usuario: ");
+    fflush(stdin);
+    scanf("%d",&contra);
+
+    for (i=0;i<limite;i++)
+    {
         if(id==lista[i].idUsuario && strcmp(nombre,lista[i].nombre)==0 && contra==lista[i].contrase)
         {
-            indice=i;
+            indice=id;
             break;
+        }
+        else
+        {
+            indice=-2;
         }
     }
     return indice;
@@ -132,6 +147,12 @@ int eUso_alta(eUsuario listaUso[],int limite)
             printf("ingrese el nombre del usuario: ");
             fflush(stdin);
             gets(listaUso[i].nombre);
+            while(esLetra(listaUso[i].nombre)==0)
+            {
+                printf("ingrese un nombre valido: ");
+                fflush(stdin);
+                gets(listaUso[i].nombre);
+            }
             printf("ingrese contraseña: ");
             fflush(stdin);
             scanf("%d",&listaUso[i].contrase);
@@ -142,4 +163,69 @@ int eUso_alta(eUsuario listaUso[],int limite)
 
     }
     return retornar;
+}
+int eUso_baja(eUsuario lista[],int limite)
+{
+    int busquedaB;
+    char respuesta;
+    int indice=0;
+    int i;
+
+    busquedaB=eUso_busqueda(lista,limite);
+
+    for(i=0;i<limite;i++)
+    {
+        if(busquedaB>=0 && lista[i].idUsuario==busquedaB)
+        {
+            eUSo_mostrarSolo(lista[i]);
+            printf("dara de baja a este usuario? s/n: ");
+            fflush(stdin);
+            respuesta=getche();
+            while(respuesta!='s' && respuesta!='n')
+            {
+                printf("\ningrese un valor valido s/n: ");
+                fflush(stdin);
+                respuesta=getche();
+            }
+            if(respuesta=='s')
+            {
+                lista[i].estado=1;
+                lista[i].idUsuario=0;
+                lista[i].contrase=0;
+                strcpy(lista[i].nombre,"");
+            }
+            else if(respuesta=='n')
+            {
+                indice=-1;
+            }
+        }
+    }
+    return indice;
+}
+int esLetra(char nombre[])
+{
+    int i=0;
+    while(nombre[i] != '\0')
+    {
+        if((nombre[i] != ' ') && (nombre[i] < 'a' || nombre[i] > 'z') && (nombre[i] < 'A' || nombre[i] > 'Z'))
+        {
+            return 0;
+        }
+        i++;
+    }
+    return 1;
+}
+
+int esNumero(char numero[])
+{
+    int i=0;
+    while(numero[i] != '\0')
+    {
+        if(numero[i] < 0 || numero[i] > 9)
+        {
+            return 0;
+        }
+        i++;
+    }
+    return 1;
 }
