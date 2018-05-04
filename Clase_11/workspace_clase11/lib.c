@@ -16,7 +16,7 @@ int eUso_inicio(eUsuario listado[],int limite)
         {
             listado[i].estado= 1;
             listado[i].idUsuario=0;
-            listado[i].contrase=1234;
+            listado[i].contrase=0;
             strcpy(listado[i].nombre,"");
         }
     }
@@ -63,6 +63,34 @@ int eUso_sigId(eUsuario lista[],int limite)
     }
 
     return retorno+1;
+}
+
+int eUso_busqueda(eUsuario lista[],int limite)
+{
+    int id;
+    char nombre[50];
+    int contra;
+    int indice=-1;
+    int i;
+
+    for (i=0;i<limite;i++)
+    {
+        printf("ingrese el id del usuario: ");
+        fflush(stdin);
+        scanf("%d",&id);
+        printf("ingrese el nombre del usuario: ");
+        fflush(stdin);
+        gets(nombre);
+        printf("ingrese la contraseña del usuario: ");
+        fflush(stdin);
+        scanf("%d",&contra);
+        if(id==lista[i].idUsuario && strcmp(nombre,lista[i].nombre)==0 && contra==lista[i].contrase)
+        {
+            indice=i;
+            break;
+        }
+    }
+    return indice;
 }
 
 int eUSo_mostrarSolo(eUsuario parametro)
