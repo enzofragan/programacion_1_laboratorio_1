@@ -16,6 +16,7 @@ int eUso_inicio(eUsuario listado[],int limite)
         {
             listado[i].estado= 1;
             listado[i].idUsuario=0;
+            strcpy(listado[i].nombre,"");
         }
     }
     return retorno;
@@ -43,23 +44,21 @@ int eUso_libreUso(eUsuario listaUso[], int limiteUso)
 
 int eUSo_mostrarSolo(eUsuario parametro)
 {
-    printf("\n%d---%s",parametro.idUsuario,parametro.nombre);
+    printf("%d---%s\n",parametro.idUsuario,parametro.nombre);
 }
 
 int eUSo_mostrarLista(eUsuario listado[],int cantidad)
 {
     int retorno = -1;
     int i;
-    if(cantidad > 0)
+    if(cantidad > 0 && listado != NULL)
     {
         retorno = 0;
 
         for(i=0; i<cantidad; i++)
         {
-            printf("hola");
-            if(listado[i].estado==1 && listado[i].idUsuario!=0)
+            if(listado[i].estado==0)
             {
-                printf("chau");
                 eUSo_mostrarSolo(listado[i]);
             }
         }
@@ -70,23 +69,23 @@ int eUSo_mostrarLista(eUsuario listado[],int cantidad)
 int eUso_alta(eUsuario listaUso[],int limite)
 {
     int retornar=-1;
-    int indice;
-    if(limite>0)
+    int i;
+    if(limite>0 && listaUso != NULL)
     {
         retornar=-2;
-        indice=eUso_libreUso(listaUso,limite);
-      //  printf("---%d---",indice);
-        if(indice>=0)
+        i=eUso_libreUso(listaUso,limite);
+        if(i>=0)
         {
-            retornar=0;
             printf("ingrese el id del usuario: ");
             fflush(stdin);
-            scanf("%d",&listaUso[indice].idUsuario);
+            scanf("%d",&listaUso[i].idUsuario);
             printf("ingrese el nombre del usuario: ");
             fflush(stdin);
-            gets(listaUso[indice].nombre);
-            listaUso[indice].estado=0;
+            gets(listaUso[i].nombre);
+            listaUso[i].estado=0;
+            retornar=0;
         }
+
     }
     return retornar;
 }

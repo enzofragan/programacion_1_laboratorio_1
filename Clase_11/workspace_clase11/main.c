@@ -9,13 +9,13 @@ int main()
 {
     int opcion;
     eUsuario listadoDeUsuario[CantUsuarios];
+    eUso_inicio(listadoDeUsuario,CantUsuarios);
 
     do
     {
      printf("1. alta\n2. baja\n3. modificacion\n4.mostrar\nElija una opcion: ");
      scanf("%d",&opcion);
 
-     eUso_inicio(listadoDeUsuario,CantUsuarios);
 
      switch(opcion)
         {
