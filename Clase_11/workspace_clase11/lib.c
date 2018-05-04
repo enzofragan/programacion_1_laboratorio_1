@@ -42,6 +42,11 @@ int eUso_libreUso(eUsuario listaUso[], int limiteUso)
     return retornar;
 }
 
+int eUso_sigId(eUsuario [],int limite)
+{
+
+}
+
 int eUSo_mostrarSolo(eUsuario parametro)
 {
     printf("%d---%s\n",parametro.idUsuario,parametro.nombre);
@@ -70,6 +75,7 @@ int eUso_alta(eUsuario listaUso[],int limite)
 {
     int retornar=-1;
     int i;
+    int id;
     if(limite>0 && listaUso != NULL)
     {
         retornar=-2;
