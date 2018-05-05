@@ -66,7 +66,7 @@ int eUso_sigId(eUsuario lista[],int limite)///id auto incrementable
     return retorno+1;///y retorna el lugar siguiente
 }
 
-int eUso_busqueda(eUsuario lista[],int limite)
+int eUso_busqueda(eUsuario lista[],int limite)///busca el usuario para la baja o modificacion
 {
     int id;
     char nombre[50];
@@ -113,22 +113,22 @@ int eUso_busqueda(eUsuario lista[],int limite)
     return indice;
 }
 
-int eUSo_mostrarSolo(eUsuario parametro)
+int eUSo_mostrarSolo(eUsuario parametro)///muestra el usuario guardado
 {
     printf("%d---%s\n",parametro.idUsuario,parametro.nombre);
 }
 
-int eUSo_mostrarLista(eUsuario listado[],int cantidad)
+int eUSo_mostrarLista(eUsuario listado[],int cantidad)///mostra la lista de usuario
 {
     int retorno = -1;
     int i;
-    if(cantidad > 0 && listado != NULL)
+    if(cantidad > 0 && listado != NULL)///si no obrepara el limite y halla algo en la lista
     {
         retorno = 0;
 
         for(i=0; i<cantidad; i++)
         {
-            if(listado[i].estado==0)
+            if(listado[i].estado==0)///si esta coupado lo muestra
             {
                 eUSo_mostrarSolo(listado[i]);
             }
@@ -137,7 +137,7 @@ int eUSo_mostrarLista(eUsuario listado[],int cantidad)
     return retorno;
 }
 
-int eUso_alta(eUsuario listaUso[],int limite)
+int eUso_alta(eUsuario listaUso[],int limite)///pide un nuevo usuario
 {
     int retornar=-1;
     int i;
@@ -145,11 +145,11 @@ int eUso_alta(eUsuario listaUso[],int limite)
     if(limite>0 && listaUso != NULL)
     {
         retornar=-2;
-        i=eUso_libreUso(listaUso,limite);
+        i=eUso_libreUso(listaUso,limite);///si encuentra un lugar libre
         if(i>=0)
         {
-            id=eUso_sigId(listaUso,limite);
-            printf("ingrese el nombre del usuario: ");
+            id=eUso_sigId(listaUso,limite);///pasa al id del siguiente al original
+            printf("ingrese el nombre del usuario: ");///pider el nombre y valida
             fflush(stdin);
             gets(listaUso[i].nombre);
             while(esLetra(listaUso[i].nombre)==0)
@@ -158,41 +158,41 @@ int eUso_alta(eUsuario listaUso[],int limite)
                 fflush(stdin);
                 gets(listaUso[i].nombre);
             }
-            printf("ingrese contraseña: ");
+            printf("ingrese contraseña: ");///pide contraseña
             fflush(stdin);
             scanf("%d",&listaUso[i].contrase);
-            listaUso[i].idUsuario=id;
-            listaUso[i].estado=0;
+            listaUso[i].idUsuario=id;///la id que se guarda es la que devuelve la funcion anterio
+            listaUso[i].estado=0;///cambiar el estado a ocupado
             retornar=0;
         }
 
     }
     return retornar;
 }
-int eUso_baja(eUsuario lista[],int limite)
+int eUso_baja(eUsuario lista[],int limite)///pide se desea dar de baja un usuario
 {
     int busquedaB;
     char respuesta;
     int indice=0;
     int i;
 
-    busquedaB=eUso_busqueda(lista,limite);
+    busquedaB=eUso_busqueda(lista,limite);///busca el usuario
 
     for(i=0;i<limite;i++)
     {
-        if(busquedaB>=0 && lista[i].idUsuario==busquedaB)
+        if(busquedaB>=0 && lista[i].idUsuario==busquedaB)///si esta y el id es el mismo que el original
         {
-            eUSo_mostrarSolo(lista[i]);
-            printf("dara de baja a este usuario? s/n: ");
+            eUSo_mostrarSolo(lista[i]);///muestra el usuario
+            printf("dara de baja a este usuario? s/n: ");///pregunta si lo dara de baja
             fflush(stdin);
             respuesta=getche();
-            while(respuesta!='s' && respuesta!='n')
+            while(respuesta!='s' && respuesta!='n')///si no es ni si ni no
             {
                 printf("\ningrese un valor valido s/n: ");
                 fflush(stdin);
                 respuesta=getche();
             }
-            if(respuesta=='s')
+            if(respuesta=='s')///si es si devuelve es valor al inicio
             {
                 lista[i].estado=1;
                 lista[i].idUsuario=0;
@@ -207,28 +207,28 @@ int eUso_baja(eUsuario lista[],int limite)
     }
     return indice;
 }
-int esLetra(char nombre[])
+int esLetra(char nombre[])///valida si es letra
 {
     int i=0;
-    while(nombre[i] != '\0')
+    while(nombre[i] != '\0')///mientras no sea /0 osea alla algo
     {
-        if((nombre[i] != ' ') && (nombre[i] < 'a' || nombre[i] > 'z') && (nombre[i] < 'A' || nombre[i] > 'Z'))
+        if((nombre[i] != ' ') && (nombre[i] < 'a' || nombre[i] > 'z') && (nombre[i] < 'A' || nombre[i] > 'Z'))///si tiene espacio y no esta entre a y z
         {
-            return 0;
+            return 0;///es numero
         }
         i++;
     }
     return 1;
 }
 
-int esNumero(char numero[])
+int esNumero(char numero[])///valida si e numeo
 {
     int i=0;
     while(numero[i] != '\0')
     {
-        if(!(isdigit(numero[i])))
+        if(!(isdigit(numero[i])))///si el char no es un digito
         {
-            return 0;
+            return 0;///es letra
         }
         i++;
     }
