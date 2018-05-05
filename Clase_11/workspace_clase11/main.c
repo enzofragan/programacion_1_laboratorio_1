@@ -10,6 +10,7 @@ int main()
     int opcion;
     int valorUno;
     int valorB;
+    int valorM;
     int string;
     eUsuario listadoDeUsuario[CantUsuarios];
     eUso_inicio(listadoDeUsuario,CantUsuarios);
@@ -26,11 +27,11 @@ int main()
         valorUno=eUso_alta(listadoDeUsuario,CantUsuarios);
         if(valorUno>=0)
         {
-            printf("\ningreso completado");
+            printf("\ningreso completado\n");
         }
         else
         {
-            printf("\ncontraseña incorrecta");
+            printf("\ningreso invalido\n");
         }
         break;
 
@@ -38,15 +39,24 @@ int main()
             valorB=eUso_baja(listadoDeUsuario,CantUsuarios);
             if(valorB>=0)
             {
-                printf("\nbaja completada");
+                printf("\nbaja completada\n");
             }
             else
             {
-                printf("\naccion cancelada");
+                printf("\naccion cancelada\n");
             }
             break;
 
         case 3:
+            valorM=eUso_modificacion(listadoDeUsuario,CantUsuarios);
+            if(valorM>=0)
+            {
+                printf("\nmodificacion completa\n");
+            }
+            else
+            {
+                printf("\naccion cancelada\n");
+            }
             break;
 
         case 4:

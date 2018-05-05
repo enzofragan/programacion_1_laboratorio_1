@@ -207,6 +207,83 @@ int eUso_baja(eUsuario lista[],int limite)///pide se desea dar de baja un usuari
     }
     return indice;
 }
+
+int eUso_modificacion(eUsuario lista[],int limite)
+{
+    int busquedaM;
+    char respuesta;
+    char respuestaM;
+    char auxNombre[50];
+    int auxContra;
+    int indice=0;
+    int i;
+
+    busquedaM=eUso_busqueda(lista,limite);///busca el usuario
+
+    for(i=0;i<limite;i++)
+    {
+        if(busquedaM>=0 && lista[i].idUsuario==busquedaM)///si esta y el id es el mismo que el original
+        {
+            eUSo_mostrarSolo(lista[i]);///muestra el usuario
+
+            printf("desea modificar a este usuario? s/n: ");///pregunta si lo modificara
+            fflush(stdin);
+            respuesta=getche();
+
+            while(respuesta!='s' && respuesta!='n')///si no es ni si ni no
+            {
+                printf("\ningrese un valor valido s/n: ");
+                fflush(stdin);
+                respuesta=getche();
+            }
+
+            if(respuesta=='s')///si es si
+            {
+                printf("\ningrese el nuevo nombre del usuario: ");///
+                fflush(stdin);
+                gets(auxNombre);
+                while(esLetra(auxNombre)==0)
+                {
+                    printf("\ingrese un nombre valido: ");
+                    fflush(stdin);
+                    gets(auxNombre);
+                }
+                printf("\ingrese la nueva contraseña: ");///
+                fflush(stdin);
+                scanf("%d",&auxContra);
+
+                printf("\nel nuevo nombre es: %s\ny el la nueva contraseña es: %d\n",auxNombre,auxContra);
+
+                printf("\ndesea aplicar estos cambios? s/n: ");///
+                fflush(stdin);
+                respuestaM=getche();
+
+                while(respuestaM!='s' && respuestaM!='n')///si no es ni si ni no
+                {
+                    printf("\ningrese un valor valido s/n: ");
+                    fflush(stdin);
+                    respuestaM=getche();
+                }
+
+                if(respuestaM=='s')
+                {
+                    strcpy(lista[i].nombre,auxNombre);
+                    lista[i].contrase=auxContra;
+                }
+                else if(respuestaM=='n')
+                {
+                    indice=-2;
+                }
+            }
+            else if(respuesta=='n')
+            {
+                indice=-1;
+            }
+        }
+    }
+    return indice;
+}
+
 int esLetra(char nombre[])///valida si es letra
 {
     int i=0;
