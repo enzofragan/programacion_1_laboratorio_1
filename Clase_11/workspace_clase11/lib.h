@@ -38,6 +38,7 @@ int eUso_sigId(eUsuario [],int limite);
 int eUso_alta(eUsuario[],int limite);
 int eUso_baja(eUsuario [],int limite);
 int eUso_modificacion(eUsuario [],int limite);
+int eUso_entrar(eUsuario [],int limite);
 int eUso_busqueda(eUsuario [],int limite);
 int eUSo_mostrarSolo(eUsuario parametro);
 int eUSo_mostrarLista(eUsuario[],int cantidad);

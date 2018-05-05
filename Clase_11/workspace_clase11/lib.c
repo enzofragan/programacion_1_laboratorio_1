@@ -208,7 +208,7 @@ int eUso_baja(eUsuario lista[],int limite)///pide se desea dar de baja un usuari
     return indice;
 }
 
-int eUso_modificacion(eUsuario lista[],int limite)
+int eUso_modificacion(eUsuario lista[],int limite)///modificar el usuario
 {
     int busquedaM;
     char respuesta;
@@ -230,16 +230,16 @@ int eUso_modificacion(eUsuario lista[],int limite)
             fflush(stdin);
             respuesta=getche();
 
-            while(respuesta!='s' && respuesta!='n')///si no es ni si ni no
+            while(respuesta!='s' && respuesta!='n')///valida la recpuesta
             {
                 printf("\ningrese un valor valido s/n: ");
                 fflush(stdin);
                 respuesta=getche();
             }
 
-            if(respuesta=='s')///si es si
+            if(respuesta=='s')///si es si pide los nuevos datos
             {
-                printf("\ningrese el nuevo nombre del usuario: ");///
+                printf("\ningrese el nuevo nombre del usuario: ");///pide de nuevo el nombre y lo guarda en un auxiliar
                 fflush(stdin);
                 gets(auxNombre);
                 while(esLetra(auxNombre)==0)
@@ -248,17 +248,17 @@ int eUso_modificacion(eUsuario lista[],int limite)
                     fflush(stdin);
                     gets(auxNombre);
                 }
-                printf("\ingrese la nueva contraseña: ");///
+                printf("\ingrese la nueva contraseña: ");///pide de nuevo la contraseña y la guarda en una auxliar
                 fflush(stdin);
                 scanf("%d",&auxContra);
 
-                printf("\nel nuevo nombre es: %s\ny el la nueva contraseña es: %d\n",auxNombre,auxContra);
+                printf("\nel nuevo nombre es: %s\ny el la nueva contraseña es: %d\n",auxNombre,auxContra);///muestra el nuevo nombre y contraseña
 
-                printf("\ndesea aplicar estos cambios? s/n: ");///
+                printf("\ndesea aplicar estos cambios? s/n: ");///pregunta si desea aplicar los cambios
                 fflush(stdin);
                 respuestaM=getche();
 
-                while(respuestaM!='s' && respuestaM!='n')///si no es ni si ni no
+                while(respuestaM!='s' && respuestaM!='n')///valida la respuesta
                 {
                     printf("\ningrese un valor valido s/n: ");
                     fflush(stdin);
@@ -279,6 +279,26 @@ int eUso_modificacion(eUsuario lista[],int limite)
             {
                 indice=-1;
             }
+        }
+    }
+    return indice;
+}
+
+int eUso_entrar(eUsuario listado[],int limite)
+{
+    int busquedaE;
+    int i;
+    int indice=-1;
+
+    busquedaE=eUso_busqueda(listado,limite);///busca el usuario
+
+    for(i=0;i<limite;i++)
+    {
+        if(busquedaE>=0 && listado[i].idUsuario==busquedaE)///si esta y el id es el mismo que el original
+        {
+            eUSo_mostrarSolo(listado[i]);///muestra el usuario
+            indice=busquedaE;
+
         }
     }
     return indice;
