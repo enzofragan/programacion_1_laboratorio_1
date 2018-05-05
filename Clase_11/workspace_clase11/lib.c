@@ -1,11 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 #include "lib.h"
 #define CantUsuarios 3
 #define CantProductos 3
 
-int eUso_inicio(eUsuario listado[],int limite)
+int eUso_inicio(eUsuario listado[],int limite)///inicia los valores
 {
     int retorno=-1;
     int i;
@@ -27,12 +28,12 @@ int eUso_libreUso(eUsuario listaUso[], int limiteUso)
 {
     int retornar=-1;
     int i;
-    if(limiteUso>0)
+    if(limiteUso>0)///mientras la lista inicie
     {
         retornar=-2;
-        for(i=0;i<limiteUso;i++)
+        for(i=0;i<limiteUso;i++)/// y no sobre pase la cantidad
         {
-            if(listaUso[i].estado==1)
+            if(listaUso[i].estado==1)///encontrar un lugar libre
             {
                 retornar=i;
                 //printf("-----%d-----\n",retornar);
@@ -43,26 +44,26 @@ int eUso_libreUso(eUsuario listaUso[], int limiteUso)
     return retornar;
 }
 
-int eUso_sigId(eUsuario lista[],int limite)
+int eUso_sigId(eUsuario lista[],int limite)///id auto incrementable
 {
     int retorno = 0;
     int i;
-    if(limite > 0 && lista != NULL)
+    if(limite > 0 && lista != NULL)///mientrar el limite sea myor a 0 y haya algo
     {
         for(i=0; i<limite; i++)
         {
-            if(lista[i].estado == 0)
+            if(lista[i].estado == 0)///si el anterior esta ocupado
             {
-                    if(lista[i].idUsuario>retorno)
+                    if(lista[i].idUsuario>retorno)///y esa id sea mayor al retorno
                     {
-                         retorno=lista[i].idUsuario;
+                         retorno=lista[i].idUsuario;///devuelve esa id
                     }
 
             }
         }
     }
 
-    return retorno+1;
+    return retorno+1;///y retorna el lugar siguiente
 }
 
 int eUso_busqueda(eUsuario lista[],int limite)
@@ -72,32 +73,36 @@ int eUso_busqueda(eUsuario lista[],int limite)
     int contra;
     int indice=-1;
     int i;
+    char buff[50];
 
     printf("ingrese el id del usuario: ");
     fflush(stdin);
-    scanf("%d",&id);
-    while(esNumero(lista[i].contrase)==0)
+    gets(buff);///pide el numero com char
+    while(esNumero(buff)==0)///valida si es numero o no
     {
-        printf("hoal\n");
+        printf("ingrese un id valido: ");
+        fflush(stdin);
+        gets(buff);
     }
+    id = atoi(buff);///los combierte a numero (atoi)
     printf("ingrese el nombre del usuario: ");
     fflush(stdin);
-    gets(nombre);
-    while(esLetra(nombre)==0)
+    gets(nombre);///pide el nombre
+    while(esLetra(nombre)==0)///valida si es solo string
     {
         printf("ingrese un nombre valido: ");
         fflush(stdin);
         gets(nombre);
     }
-    printf("ingrese la contraseña del usuario: ");
+    printf("ingrese la contraseña del usuario: ");///extra: pide contraseña
     fflush(stdin);
     scanf("%d",&contra);
 
     for (i=0;i<limite;i++)
     {
-        if(id==lista[i].idUsuario && strcmp(nombre,lista[i].nombre)==0 && contra==lista[i].contrase)
+        if(id==lista[i].idUsuario && strcmp(nombre,lista[i].nombre)==0 && contra==lista[i].contrase)///si son iguales lo encontro
         {
-            indice=id;
+            indice=id;///de vuelve el id encontrado
             break;
         }
         else
@@ -221,7 +226,7 @@ int esNumero(char numero[])
     int i=0;
     while(numero[i] != '\0')
     {
-        if(numero[i] < 0 || numero[i] > 9)
+        if(!(isdigit(numero[i])))
         {
             return 0;
         }
