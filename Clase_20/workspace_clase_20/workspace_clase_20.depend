@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1527858447 source:d:\fragan\workspace_clase_20\main.c
+	<stdio.h>
+	<string.h>
+	<stdlib.h>
+
